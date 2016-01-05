@@ -62,12 +62,13 @@ class ElasticSearchOutput(keyName: String,
   override val httpNodes = getHostPortConfs(NodesName, DefaultNode, DefaultHttpPort, NodeName, HttpPortName)
 
   @transient private lazy val elasticClient = {
-    val settings = ImmutableSettings.settingsBuilder().put("cluster.name", clusterName).build()
-    if (isLocalhost) ElasticClient.local(settings)
-    else {
+    val settings = Settings.builder().put("cluster.name", clusterName).build()
+    if (isLocalhost) {
+      ElasticClient.local(settings)
+    } else {
       val hostsPorts = tcpNodes.map { case (host, port) => s"$host:$port" }.mkString(",")
       val uri = s"elasticsearch://$hostsPorts"
-      ElasticClient.remote(settings, ElasticsearchClientUri(uri))
+      ElasticClient.transport(settings, ElasticsearchClientUri(uri))
     }
   }
 

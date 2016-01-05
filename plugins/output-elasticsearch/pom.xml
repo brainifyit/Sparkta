@@ -47,13 +47,13 @@
     <dependencies>
         <dependency>
             <groupId>org.elasticsearch</groupId>
-            <artifactId>elasticsearch-spark_${scala.binary.version}</artifactId>
+            <artifactId>elasticsearch-hadoop</artifactId>
             <version>${elastic.spark.version}</version>
         </dependency>
         <dependency>
             <groupId>com.sksamuel.elastic4s</groupId>
             <artifactId>elastic4s-core_${scala.binary.version}</artifactId>
-            <version>1.7.4</version>
+            <version>2.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
